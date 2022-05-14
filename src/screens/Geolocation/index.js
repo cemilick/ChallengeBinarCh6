@@ -29,18 +29,10 @@ export default function Index() {
     );
   };
 
-  useEffect(async () => {
-    try {
-      const permissions = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-
-      if (permissions === PermissionsAndroid.RESULTS.GRANTED) getMyLocation();
-      else alert('Please give this app access location permissions');
-    } catch (error) {
-      console.log(error);
-    }
+  useEffect(() => {
+    getMyLocation();
   }, []);
+
   return (
     <View style={styles.container}>
       <MapView

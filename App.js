@@ -20,6 +20,22 @@ const onSignIn = async user => {
 };
 
 export default function App({navigation}) {
+  useEffect(() => {
+    try {
+      const location = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      const camera = await PermissionsAndroid.request(
+        PermissionsAndroid.CAMERA,
+      );
+      if (permissions !== PermissionsAndroid.RESULTS.GRANTED)
+        alert('Please give this app access location permissions');
+      if (camera !== PermissionsAndroid.RESULTS.GRANTED)
+        alert('Please give this app access camera permissions');
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <NavigationContainer>
       <MainRoutes />
